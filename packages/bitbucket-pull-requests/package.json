@@ -1,0 +1,8 @@
+{
+  "name": "@agentmuster/module-bitbucket-pull-requests",
+  "version": "0.2.0",
+  "description": "Review the diff of Bitbucket Cloud PRs the agent links in a session, then merge them after live checks and your confirmation, without opening Bitbucket.",
+  "type": "module",
+  "license": "MIT",
+  "private": true
+}

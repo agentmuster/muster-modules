@@ -9,21 +9,37 @@ Modules connect [Muster](https://github.com/rampradeep84/muster) to other servic
 
 Each module is a folder with a `muster-module.json` manifest and an entry file, published as its own npm package. Muster will be able to browse this repo's `registry.json` and install modules from the app.
 
-## Status
+## Modules
 
-Early. The first modules (Bitbucket Pipelines, Bitbucket pull requests and Microsoft Teams) still live in the Muster repo. They move here once the module SDK, `@agentmuster/module-sdk`, is published and Muster can install modules from npm.
+| Module | What it does |
+|---|---|
+| [Bitbucket Pipelines](packages/bitbucket-pipelines) | Run custom pipelines, such as deploys, with a preview of what's live |
+| [Bitbucket pull requests](packages/bitbucket-pull-requests) | Review a PR's diff in Muster and merge it after your sign-off |
+| [Microsoft Teams](packages/microsoft-teams) | Teams messages meant for you in the Inbox; Teams search for the agent |
+
+## Installing
+
+In Muster, open **⋮ → Modules → Browse**. It lists the modules in this repository. **Install** shows what the module can reach, then installs it switched off. From a terminal, use `agentmuster module add <id>`.
+
+Muster fetches this repository with the git credentials on your desktop, so a private copy works too.
 
 ## Layout
 
 ```
-packages/<module>/        one module per folder, published as @agentmuster/module-<name>
-templates/                a starting point for new modules
-registry.json             what Muster's Browse tab lists: name, description, permissions, latest version
+packages/<id>/            one module per folder: muster-module.json, index.ts, tests, README
+templates/hello-world/    a starting point for new modules
+registry.json             what Muster's Browse tab lists: id, name, description, version, folder
 ```
 
 ## Writing a module
 
-See the Modules section of the [Muster README](https://github.com/rampradeep84/muster#modules) for the manifest and the module API, and `CONTRIBUTING.md` for what a module must do before it's accepted here.
+```sh
+npm install          # also links @agentmuster/module-sdk from a shallow clone of Muster (or set MUSTER_DIR)
+cp -r templates/hello-world packages/my-module
+npm run check        # registry, typecheck and tests
+```
+
+Modules import `@agentmuster/module-sdk` for types, `defineModule` and `prFingerprint`, and `@agentmuster/module-sdk/testing` for a fake context to test against. Muster provides the SDK at run time, so don't add it to a module's dependencies. The manifest format is in the SDK's `manifest.schema.json`; point `$schema` at it for editor checks. See `CONTRIBUTING.md` for what a module must do before it's accepted here.
 
 ## License
 

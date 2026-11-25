@@ -1,0 +1,38 @@
+# Synthetic pipeline file shaped like a real deploy repository: YAML anchors, two custom pipelines,
+# variables with defaults and descriptions.
+pipelines:
+  custom:
+    deploy-production:
+      - variables:
+          - name: RELEASE_NOTE
+            default: ""
+            description: "Release note"
+      - step:
+          name: build
+          image: &ci-image
+            name: example/ci:1
+          script:
+            - echo build
+      - step:
+          name: deploy
+          image: *ci-image
+          script:
+            - echo deploy production
+    deploy-staging:
+      - variables:
+          - name: APP_BRANCH
+            default: staging
+            description: "Application branch to deploy"
+          - name: RELEASE_NOTE
+            default: ""
+            description: "Release note"
+      - step:
+          name: deploy
+          image: *ci-image
+          script:
+            - echo deploy staging
+    rebuild-cache:
+      - step:
+          name: rebuild
+          script:
+            - echo rebuild

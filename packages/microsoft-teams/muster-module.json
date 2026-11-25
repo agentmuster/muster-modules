@@ -1,0 +1,147 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "id": "microsoft-teams",
+  "name": "Microsoft Teams",
+  "description": "Puts Teams requests meant for you in the Inbox (direct messages, @mentions, replies to your channel posts), and lets the agent search and read Teams while it works. Reads Teams through the Composio CLI signed in on this desktop.",
+  "version": "0.2.0",
+  "apiVersion": 1,
+  "entry": "./index.ts",
+  "network": [
+    "graph.microsoft.com"
+  ],
+  "connectors": [
+    "composio"
+  ],
+  "settings": [
+    {
+      "key": "groupChats",
+      "label": "Group and meeting chats",
+      "type": "select",
+      "default": "mentions",
+      "options": [
+        {
+          "value": "mentions",
+          "label": "Only messages that @mention me"
+        },
+        {
+          "value": "all",
+          "label": "Every message in group chats"
+        }
+      ]
+    },
+    {
+      "key": "channels",
+      "label": "Channels",
+      "type": "select",
+      "default": "mentions-replies",
+      "options": [
+        {
+          "value": "mentions-replies",
+          "label": "@mentions and replies to my posts"
+        },
+        {
+          "value": "mentions",
+          "label": "Only @mentions"
+        },
+        {
+          "value": "off",
+          "label": "Don't check channels"
+        }
+      ]
+    },
+    {
+      "key": "lookbackDays",
+      "label": "Days to look back the first time",
+      "type": "number",
+      "default": 2
+    }
+  ],
+  "actions": [],
+  "feeds": [
+    {
+      "id": "inbox",
+      "title": "Teams",
+      "every": 5
+    }
+  ],
+  "tools": [
+    {
+      "name": "teams_search",
+      "description": "Search the owner's Microsoft Teams messages (chats and channels) by keywords, ticket ids, customer or product names, or people. Returns matching messages newest-relevant first, each with a snippet, author, time and ids to read more with teams_read_chat or teams_read_thread. Read-only.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search words, e.g. a ticket id like PROJ-1482 or a customer name"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum results, 1-25 (default 10)"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "teams_recent_chats",
+      "description": "List the owner's most recent Teams chats (direct, group and meeting chats) with their ids, members or topic, and the latest message. Optionally filter by a person's name or a topic word. Read-only.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Only chats whose topic or member names contain this"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "teams_read_chat",
+      "description": "Read the latest messages of one Teams chat, oldest first. Give chat_id (from teams_search or teams_recent_chats) or person (a name, to open the direct chat with them). Read-only.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "chat_id": {
+            "type": "string"
+          },
+          "person": {
+            "type": "string",
+            "description": "Name of the other person in a direct chat"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Messages to read, 1-50 (default 25)"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "teams_read_thread",
+      "description": "Read a Teams channel post and its replies. Give link (a Teams message link) or team_id, channel_id and message_id from teams_search. Read-only.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string"
+          },
+          "team_id": {
+            "type": "string"
+          },
+          "channel_id": {
+            "type": "string"
+          },
+          "message_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ]
+}

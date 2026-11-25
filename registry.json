@@ -1,4 +1,38 @@
 {
   "format": 1,
-  "modules": []
+  "modules": [
+    {
+      "id": "bitbucket-pipelines",
+      "name": "Bitbucket Pipelines",
+      "description": "Run a repository's custom pipelines, such as deploys, after a preview of what is live and what will run.",
+      "version": "0.2.0",
+      "path": "packages/bitbucket-pipelines",
+      "categories": [
+        "deploys",
+        "code hosts"
+      ]
+    },
+    {
+      "id": "bitbucket-pull-requests",
+      "name": "Bitbucket pull requests",
+      "description": "Review the diff of Bitbucket Cloud PRs the agent links in a session, then merge them after live checks and your confirmation, without opening Bitbucket.",
+      "version": "0.2.0",
+      "path": "packages/bitbucket-pull-requests",
+      "categories": [
+        "code hosts",
+        "code review"
+      ]
+    },
+    {
+      "id": "microsoft-teams",
+      "name": "Microsoft Teams",
+      "description": "Puts Teams requests meant for you in the Inbox (direct messages, @mentions, replies to your channel posts), and lets the agent search and read Teams while it works. Reads Teams through the Composio CLI signed in on this desktop.",
+      "version": "0.2.0",
+      "path": "packages/microsoft-teams",
+      "categories": [
+        "chat",
+        "inbox"
+      ]
+    }
+  ]
 }

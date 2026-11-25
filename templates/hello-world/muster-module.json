@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "id": "hello-world",
+  "name": "Hello world",
+  "description": "A starting point for a module: one setting, one action with a preview, and one agent tool.",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "entry": "./index.ts",
+  "network": ["api.github.com"],
+  "settings": [
+    {"key": "owner", "label": "GitHub user or organization", "type": "string", "required": true}
+  ],
+  "tools": [
+    {
+      "name": "hello_repos",
+      "description": "List the public repositories of the configured GitHub user, with their descriptions. Read-only.",
+      "parameters": {"type": "object", "properties": {"limit": {"type": "number"}}, "additionalProperties": false}
+    }
+  ],
+  "actions": [
+    {"id": "greet", "title": "Say hello", "description": "Shows what it would do, then does it.", "confirm": "always"}
+  ]
+}

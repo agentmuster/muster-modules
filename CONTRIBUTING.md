@@ -14,7 +14,9 @@ Modules run on people's own computers with their tokens, so every module here is
 
 ## Pull requests
 
-One module, or one change to a module, per pull request. Bump the module's version, and update `registry.json` in the same pull request.
+One module, or one change to a module, per pull request. Bump the version in both `muster-module.json` and `package.json`, update `registry.json` in the same pull request, and run `npm run check`.
+
+Pin third-party dependencies to exact versions. Muster installs them with npm's install scripts switched off, so a module can't depend on one that needs a build step.
 
 ## Conduct
 

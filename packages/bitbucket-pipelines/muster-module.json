@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "id": "bitbucket-pipelines",
+  "name": "Bitbucket Pipelines",
+  "description": "Run a repository's custom pipelines, such as deploys, after a preview of what is live and what will run.",
+  "version": "0.2.0",
+  "apiVersion": 1,
+  "entry": "./index.ts",
+  "network": [
+    "api.bitbucket.org"
+  ],
+  "settings": [
+    {
+      "key": "workspace",
+      "label": "Workspace",
+      "type": "string",
+      "required": true,
+      "description": "The part after bitbucket.org/ in the repository URL."
+    },
+    {
+      "key": "repository",
+      "label": "Repository",
+      "type": "string",
+      "required": true
+    },
+    {
+      "key": "branch",
+      "label": "Default branch",
+      "type": "string",
+      "default": "main",
+      "description": "The branch whose bitbucket-pipelines.yml runs."
+    },
+    {
+      "key": "username",
+      "label": "Atlassian account email",
+      "type": "string",
+      "description": "For an Atlassian API token. Leave empty for a repository or workspace access token."
+    },
+    {
+      "key": "token",
+      "label": "API token",
+      "type": "secret",
+      "required": true,
+      "description": "Needs the read:repository, read:pipeline and write:pipeline scopes.",
+      "link": {
+        "url": "https://id.atlassian.com/manage-profile/security/api-tokens",
+        "label": "Create an Atlassian API token (choose “Create API token with scopes” → Bitbucket)"
+      }
+    },
+    {
+      "key": "pipelines",
+      "label": "Pipelines to offer",
+      "type": "string",
+      "description": "Custom pipeline names, comma separated. Empty offers every custom pipeline."
+    },
+    {
+      "key": "healthUrls",
+      "label": "Health URLs",
+      "type": "text",
+      "description": "Optional, one per line: pipeline = URL. The preview shows the build each environment serves (current-build-version header)."
+    },
+    {
+      "key": "releaseOffset",
+      "label": "Release number offset",
+      "type": "number",
+      "default": 0,
+      "description": "Added to the build number to show the release number, if your pipeline numbers releases that way."
+    },
+    {
+      "key": "apiBase",
+      "label": "API address",
+      "type": "string",
+      "default": "https://api.bitbucket.org/2.0"
+    },
+    {
+      "key": "pollSeconds",
+      "label": "Status check interval (seconds)",
+      "type": "number",
+      "default": 10
+    }
+  ],
+  "actions": [
+    {
+      "id": "run-pipeline",
+      "title": "Run pipeline",
+      "description": "Run a custom pipeline, such as a staging or production deploy.",
+      "confirm": "always"
+    }
+  ]
+}

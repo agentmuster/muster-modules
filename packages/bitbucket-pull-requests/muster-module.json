@@ -1,0 +1,89 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "id": "bitbucket-pull-requests",
+  "name": "Bitbucket pull requests",
+  "description": "Review the diff of Bitbucket Cloud PRs the agent links in a session, then merge them after live checks and your confirmation, without opening Bitbucket.",
+  "version": "0.2.0",
+  "apiVersion": 1,
+  "entry": "./index.ts",
+  "network": [
+    "api.bitbucket.org"
+  ],
+  "settings": [
+    {
+      "key": "username",
+      "label": "Atlassian account email",
+      "type": "string",
+      "description": "For an Atlassian API token. Leave empty for a repository access token."
+    },
+    {
+      "key": "token",
+      "label": "API token",
+      "type": "secret",
+      "required": true,
+      "description": "Needs read:repository:bitbucket, read:pullrequest:bitbucket and write:pullrequest:bitbucket. Repository write permission may also be required to merge.",
+      "link": {
+        "url": "https://id.atlassian.com/manage-profile/security/api-tokens",
+        "label": "Create an Atlassian API token (choose “Create API token with scopes” → Bitbucket)"
+      }
+    },
+    {
+      "key": "minApprovals",
+      "label": "Approvals needed from others in Bitbucket",
+      "type": "number",
+      "default": 0,
+      "description": "Your review in Muster is the sign-off; this is extra. Author approvals do not count. Bitbucket's own merge checks always apply."
+    },
+    {
+      "key": "allowedBranches",
+      "label": "Allowed target branches",
+      "type": "string",
+      "default": "staging, main",
+      "required": true
+    },
+    {
+      "key": "apiBase",
+      "label": "API base URL",
+      "type": "string",
+      "default": "https://api.bitbucket.org/2.0"
+    }
+  ],
+  "tools": [
+    {
+      "name": "bitbucket_pr_context",
+      "description": "Read a Bitbucket PR's diff, source and target commits, approvals, build statuses, unresolved tasks, conflicts and mergeability checks. Read-only; cannot approve, comment or merge. Give the full PR URL.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "merge",
+      "title": "Merge reviewed PR",
+      "description": "Use the Pull requests tab in the session's Files panel: read the diff, mark it reviewed, then merge.",
+      "confirm": "always",
+      "policy": "reviewed-pr"
+    }
+  ],
+  "providers": {
+    "pullRequests": {
+      "links": [
+        {
+          "host": "bitbucket.org",
+          "path": "/{owner}/{repo}/pull-requests/{number}"
+        }
+      ],
+      "mergeAction": "merge"
+    }
+  }
+}

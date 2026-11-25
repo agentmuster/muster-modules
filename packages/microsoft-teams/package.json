@@ -1,0 +1,8 @@
+{
+  "name": "@agentmuster/module-microsoft-teams",
+  "version": "0.2.0",
+  "description": "Puts Teams requests meant for you in the Inbox (direct messages, @mentions, replies to your channel posts), and lets the agent search and read Teams while it works. Reads Teams through the Composio CLI signed in on this desktop.",
+  "type": "module",
+  "license": "MIT",
+  "private": true
+}
