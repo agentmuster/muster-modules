@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/agentmuster/muster/main/packages/module-sdk/manifest.schema.json",
   "id": "bitbucket-pull-requests",
   "name": "Bitbucket pull requests",
   "description": "Review the diff of Bitbucket Cloud PRs the agent links in a session, then merge them after live checks and your confirmation, without opening Bitbucket.",

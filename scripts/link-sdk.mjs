@@ -9,7 +9,7 @@ let muster = process.env.MUSTER_DIR && path.resolve(process.env.MUSTER_DIR);
 if (!muster) {
   muster = path.join(root, '.muster');
   if (!existsSync(path.join(muster, '.git'))) {
-    execFileSync('git', ['clone', '--quiet', '--depth', '1', 'https://github.com/rampradeep84/muster', muster], {stdio: 'inherit'});
+    execFileSync('git', ['clone', '--quiet', '--depth', '1', 'https://github.com/agentmuster/muster', muster], {stdio: 'inherit'});
   } else {
     execFileSync('git', ['-C', muster, 'pull', '--quiet', '--ff-only'], {stdio: 'inherit'});
   }

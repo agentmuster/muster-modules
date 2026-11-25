@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/agentmuster/muster/main/packages/module-sdk/manifest.schema.json",
   "id": "bitbucket-pipelines",
   "name": "Bitbucket Pipelines",
   "description": "Run a repository's custom pipelines, such as deploys, after a preview of what is live and what will run.",

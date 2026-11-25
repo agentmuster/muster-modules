@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/agentmuster/muster/main/packages/module-sdk/manifest.schema.json",
   "id": "microsoft-teams",
   "name": "Microsoft Teams",
   "description": "Puts Teams requests meant for you in the Inbox (direct messages, @mentions, replies to your channel posts), and lets the agent search and read Teams while it works. Reads Teams through the Composio CLI signed in on this desktop.",

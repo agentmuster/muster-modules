@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/rampradeep84/muster/main/packages/module-sdk/manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/agentmuster/muster/main/packages/module-sdk/manifest.schema.json",
   "id": "hello-world",
   "name": "Hello world",
   "description": "A starting point for a module: one setting, one action with a preview, and one agent tool.",
