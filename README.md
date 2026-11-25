@@ -1,6 +1,6 @@
 # Muster modules
 
-Modules connect [Muster](https://agentmuster.com) ([code](https://github.com/agentmuster/muster)) to other services. A module can add:
+Modules connect [Muster](https://agentmuster.io) ([code](https://github.com/agentmuster/muster)) to other services. A module can add:
 
 - **actions** you run from Muster's Actions panel, such as a deploy, always with a preview and your confirmation first;
 - **Inbox feeds**, such as Teams messages meant for you, which Muster groups into requests;
